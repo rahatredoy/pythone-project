@@ -1,0 +1,14 @@
+{% extends 'customer/base.html' %}
+
+{% block title %}Order Placed{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="empty-state">
+        <i class="bi bi-check-circle text-success"></i>
+        <h4>Thank you, {{ order.customer_name }}!</h4>
+        <p>Your order <strong>#{{ order.id }}</strong> has been placed. Total: <strong>${{ order.total_price|floatformat:2 }}</strong> (Cash on Delivery).</p>
+        <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+    </div>
+</div>
+{% endblock %}

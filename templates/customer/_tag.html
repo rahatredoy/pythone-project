@@ -1,0 +1,6 @@
+{# "-7%" or "New" label on a product image. Pass size='big' for the details page. #}
+{% if product.discount_percent %}
+    <span class="tag {{ size }}">-{{ product.discount_percent }}%</span>
+{% elif product.is_featured %}
+    <span class="tag {{ size }}">New</span>
+{% endif %}

@@ -1,0 +1,32 @@
+{% extends 'customer/base.html' %}
+
+{% block title %}Categories{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb shop-breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item active">Categories</li>
+        </ol>
+    </nav>
+
+    <div class="section-head mt-0"><h2>All Categories</h2></div>
+
+    <div class="row row-cols-2 row-cols-md-4 g-4">
+        {% for category in all_categories %}
+            <div class="col">
+                <a href="{% url 'product_list' %}?category={{ category.id }}" class="category-card category-card-lg">
+                    {% if category.image %}
+                        <img src="{{ category.image.url }}" alt="{{ category.name }}">
+                    {% else %}
+                        <i class="bi bi-grid"></i>
+                    {% endif %}
+                    <span>{{ category.name }}</span>
+                    <small>{{ category.products.count }} product{{ category.products.count|pluralize }}</small>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

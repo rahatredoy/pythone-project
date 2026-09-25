@@ -1,0 +1,72 @@
+{% extends 'customer/base.html' %}
+
+{% block title %}My Cart{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb shop-breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item active">Cart</li>
+        </ol>
+    </nav>
+
+    <div class="section-head mt-0"><h2>My Cart</h2></div>
+
+    {% if items %}
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="detail-card p-0 h-auto">
+                {% for item in items %}
+                    <div class="cart-row">
+                        <a href="{% url 'product_detail' item.product.id %}" class="cart-img">
+                            <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+                        </a>
+                        <div class="flex-grow-1">
+                            <a href="{% url 'product_detail' item.product.id %}" class="product-name">{{ item.product.name }}</a>
+                            <div class="product-category">{{ item.product.category.name }}</div>
+                            <div class="fw-semibold">${{ item.product.price|floatformat:2 }}</div>
+                        </div>
+
+                        <!-- change quantity -->
+                        <form action="{% url 'cart_update' item.product.id %}" method="post" class="d-flex gap-2 align-items-center">
+                            {% csrf_token %}
+                            <input type="number" name="quantity" value="{{ item.quantity }}" min="1" max="{{ item.product.stock_quantity }}" class="form-control form-control-sm cart-qty" aria-label="Quantity">
+                            <button class="btn btn-sm btn-outline-primary" type="submit">Update</button>
+                        </form>
+
+                        <div class="cart-subtotal">${{ item.subtotal|floatformat:2 }}</div>
+
+                        <!-- remove = set quantity to 0 -->
+                        <form action="{% url 'cart_update' item.product.id %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="quantity" value="0">
+                            <button class="btn btn-sm btn-link text-danger" type="submit" title="Remove" aria-label="Remove {{ item.product.name }}"><i class="bi bi-trash3"></i></button>
+                        </form>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="detail-card summary-card">
+                <h5>Order Summary</h5>
+                <div class="d-flex justify-content-between"><span>Subtotal</span><span>${{ total|floatformat:2 }}</span></div>
+                <div class="d-flex justify-content-between"><span>Delivery</span><span class="text-success">Free</span></div>
+                <hr>
+                <div class="d-flex justify-content-between total"><span>Total</span><span>${{ total|floatformat:2 }}</span></div>
+                <a href="{% url 'checkout' %}" class="btn btn-primary w-100 mt-3 btn-cart">Proceed to Checkout</a>
+                <a href="{% url 'product_list' %}" class="btn btn-link w-100 mt-1">Continue shopping</a>
+            </div>
+        </div>
+    </div>
+    {% else %}
+        <div class="empty-state">
+            <i class="bi bi-cart-x"></i>
+            <h4>Your cart is empty</h4>
+            <p>Looks like you haven't added anything yet.</p>
+            <a href="{% url 'product_list' %}" class="btn btn-primary">Start shopping</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

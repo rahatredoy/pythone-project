@@ -1,0 +1,2 @@
+{# 5 star icons for product.rating (see Product.stars() in models.py) #}
+{% for star in product.stars %}{% if star == 'full' %}<i class="bi bi-star-fill"></i>{% elif star == 'half' %}<i class="bi bi-star-half"></i>{% else %}<i class="bi bi-star"></i>{% endif %}{% endfor %}

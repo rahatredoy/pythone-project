@@ -1,0 +1,29 @@
+{# One product row in an admin table (used by dashboard + products pages) #}
+<tr>
+    <td><img src="{{ product.image.url }}" alt="{{ product.name }}" class="table-img"></td>
+    <td>
+        <div class="fw-semibold">{{ product.name }}</div>
+        {% if product.is_featured %}<small class="text-primary">Featured</small>{% endif %}
+    </td>
+    <td><span class="pill">{{ product.category.name }}</span></td>
+    <td class="fw-semibold">${{ product.price|floatformat:2 }}</td>
+    <td>
+        {% if product.stock_quantity == 0 %}
+            <span class="stock-badge out">Out of stock</span>
+        {% elif product.stock_quantity < 10 %}
+            <span class="stock-badge low">{{ product.stock_quantity }} left</span>
+        {% else %}
+            <span class="stock-badge ok">{{ product.stock_quantity }}</span>
+        {% endif %}
+    </td>
+    <td class="text-end text-nowrap">
+        <a href="{% url 'product_detail' product.id %}" target="_blank" class="btn btn-icon" title="View on website"><i class="bi bi-eye"></i></a>
+        <a href="{% url 'admin_product_edit' product.id %}" class="btn btn-icon btn-edit" title="Edit"><i class="bi bi-pencil-square"></i> <span>Edit</span></a>
+        <form action="{% url 'admin_product_delete' product.id %}" method="post" class="d-inline"
+              onsubmit="return confirm('Delete &quot;{{ product.name|escapejs }}&quot;? This cannot be undone.');">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ request.get_full_path }}">
+            <button type="submit" class="btn btn-icon btn-delete" title="Delete"><i class="bi bi-trash3"></i> <span>Delete</span></button>
+        </form>
+    </td>
+</tr>

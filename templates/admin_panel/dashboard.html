@@ -1,0 +1,95 @@
+{% extends 'admin_panel/base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <div>
+        <h1>Dashboard</h1>
+        <p>Welcome back, {{ user.username }}! Here is what's happening in your store.</p>
+    </div>
+    <a href="{% url 'admin_product_add' %}" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Add Product</a>
+</div>
+
+<!-- ======================= STAT CARDS ======================= -->
+<div class="row g-3 mb-4">
+    <div class="col-sm-6 col-xl-3">
+        <a href="{% url 'admin_products' %}" class="stat-card">
+            <div class="stat-icon blue"><i class="bi bi-box-seam"></i></div>
+            <div>
+                <span>Total Products</span>
+                <h3>{{ total_products }}</h3>
+                {% if out_of_stock %}<small class="text-danger">{{ out_of_stock }} out of stock</small>{% else %}<small>All in stock</small>{% endif %}
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <a href="{% url 'admin_categories' %}" class="stat-card">
+            <div class="stat-icon purple"><i class="bi bi-tags"></i></div>
+            <div><span>Total Categories</span><h3>{{ total_categories }}</h3><small>Product groups</small></div>
+        </a>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <a href="{% url 'admin_orders' %}" class="stat-card">
+            <div class="stat-icon green"><i class="bi bi-receipt"></i></div>
+            <div><span>Total Orders</span><h3>{{ total_orders }}</h3><small>All time</small></div>
+        </a>
+    </div>
+    <div class="col-sm-6 col-xl-3">
+        <a href="{% url 'admin_customers' %}" class="stat-card">
+            <div class="stat-icon orange"><i class="bi bi-people"></i></div>
+            <div><span>Total Customers</span><h3>{{ total_customers }}</h3><small>Unique buyers</small></div>
+        </a>
+    </div>
+</div>
+
+<div class="row g-4">
+    <!-- ======================= RECENT PRODUCTS ======================= -->
+    <div class="col-xl-8">
+        <div class="panel">
+            <div class="panel-head">
+                <h5>Recent Products</h5>
+                <a href="{% url 'admin_products' %}">View all</a>
+            </div>
+            <div class="table-responsive">
+                <table class="table admin-table align-middle mb-0">
+                    <thead>
+                        <tr><th>Image</th><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th class="text-end">Actions</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for product in recent_products %}
+                            {% include 'admin_panel/_product_row.html' %}
+                        {% empty %}
+                            <tr><td colspan="6" class="text-center text-secondary py-4">No products yet.</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================= RECENT ORDERS ======================= -->
+    <div class="col-xl-4">
+        <div class="panel">
+            <div class="panel-head">
+                <h5>Recent Orders</h5>
+                <a href="{% url 'admin_orders' %}">View all</a>
+            </div>
+            {% for order in recent_orders %}
+                <a href="{% url 'admin_order_detail' order.id %}" class="order-line">
+                    <div>
+                        <strong>#{{ order.id }} &middot; {{ order.customer_name }}</strong>
+                        <small>{{ order.created_date|timesince }} ago</small>
+                    </div>
+                    <div class="text-end">
+                        <strong>${{ order.total_price|floatformat:2 }}</strong>
+                        <span class="status status-{{ order.status|lower }}">{{ order.status }}</span>
+                    </div>
+                </a>
+            {% empty %}
+                <p class="text-secondary text-center py-4 mb-0">No orders yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

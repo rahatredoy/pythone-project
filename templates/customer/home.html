@@ -1,0 +1,153 @@
+{% extends 'customer/base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+
+    <!-- ======================= HERO SLIDER (Bootstrap carousel) ======================= -->
+    <div id="heroSlider" class="carousel slide hero" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="0" class="active" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="hero-slide">
+                    <div class="hero-text">
+                        <span class="hero-kicker">New Collection</span>
+                        <h1>Upgrade Your <span>Tech Today</span></h1>
+                        <p>Discover the latest laptops, accessories and more at the best prices.</p>
+                        <a href="{% url 'product_list' %}" class="btn btn-primary btn-hero">Shop Now <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="podium"></div>
+                        <img src="{% static 'img/apple-macbook-pro-14-1.webp' %}" alt="Laptop">
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="hero-slide">
+                    <div class="hero-text">
+                        <span class="hero-kicker">Smartphones</span>
+                        <h1>Power in Your <span>Pocket</span></h1>
+                        <p>The newest phones and tablets with great cameras and all-day battery.</p>
+                        <a href="{% url 'category_list' %}" class="btn btn-primary btn-hero">Shop Now <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="podium"></div>
+                        <img src="{% static 'img/iphone-13-pro-1.webp' %}" alt="Smartphone">
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="hero-slide">
+                    <div class="hero-text">
+                        <span class="hero-kicker">Footwear</span>
+                        <h1>Step Up Your <span>Style</span></h1>
+                        <p>Comfortable sneakers and running shoes for every day.</p>
+                        <a href="{% url 'product_list' %}" class="btn btn-primary btn-hero">Shop Now <i class="bi bi-arrow-right"></i></a>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="podium"></div>
+                        <img src="{% static 'img/nike-air-jordan-1-1.webp' %}" alt="Sneakers">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroSlider" data-bs-slide="prev" aria-label="Previous">
+            <span class="hero-arrow"><i class="bi bi-chevron-left"></i></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroSlider" data-bs-slide="next" aria-label="Next">
+            <span class="hero-arrow"><i class="bi bi-chevron-right"></i></span>
+        </button>
+    </div>
+
+    <!-- ======================= SHOP BY CATEGORY ======================= -->
+    <section class="section">
+        <div class="section-head">
+            <h2>Shop by Category</h2>
+            <a href="{% url 'category_list' %}">View All <i class="bi bi-arrow-right"></i></a>
+        </div>
+        <div class="row row-cols-3 row-cols-md-4 row-cols-lg-8 g-3">
+            {% for category in all_categories|slice:":8" %}
+                <div class="col">
+                    <a href="{% url 'product_list' %}?category={{ category.id }}" class="category-card">
+                        {% if category.image %}
+                            <img src="{{ category.image.url }}" alt="{{ category.name }}">
+                        {% else %}
+                            <i class="bi bi-grid"></i>
+                        {% endif %}
+                        <span>{{ category.name }}</span>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- ======================= FEATURED PRODUCTS ======================= -->
+    <section class="section">
+        <div class="section-head">
+            <h2>Featured Products</h2>
+            <a href="{% url 'product_list' %}">View All <i class="bi bi-arrow-right"></i></a>
+        </div>
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 g-3">
+            {% for product in featured_products %}
+                <div class="col">{% include 'customer/_product_card.html' %}</div>
+            {% empty %}
+                <p class="text-muted">No featured products yet.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- ======================= SPECIAL OFFER BANNER ======================= -->
+    <section class="offer-banner">
+        <div class="offer-text">
+            <span class="offer-kicker">Special Offer</span>
+            <h2>Up to <span>40% Off</span></h2>
+            <p>On selected products. Limited time only!</p>
+            <a href="{% url 'product_list' %}" class="btn btn-danger btn-hero">Shop Now <i class="bi bi-arrow-right"></i></a>
+        </div>
+        <div class="offer-visual">
+            <div class="offer-item small"><img src="{% static 'img/apple-airpods-max-1.webp' %}" alt="Headphones"><div class="stand"></div></div>
+            <div class="offer-item big"><img src="{% static 'img/dell-xps-13-laptop-1.webp' %}" alt="Laptop"><div class="stand"></div></div>
+            <div class="offer-item small"><img src="{% static 'img/apple-watch-series-4-1.webp' %}" alt="Smart watch"><div class="stand"></div></div>
+        </div>
+    </section>
+
+    <!-- ======================= BEST SELLING PRODUCTS ======================= -->
+    <section class="section">
+        <div class="section-head">
+            <h2>Best Selling Products</h2>
+            <a href="{% url 'product_list' %}">View All <i class="bi bi-arrow-right"></i></a>
+        </div>
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 g-3">
+            {% for product in best_selling %}
+                <div class="col">{% include 'customer/_product_card.html' %}</div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- ======================= ALL PRODUCTS ======================= -->
+    <section class="section">
+        <div class="section-head">
+            <h2>All Products <small class="text-muted fs-6 fw-normal">({{ all_products|length }})</small></h2>
+            <a href="{% url 'product_list' %}">View All <i class="bi bi-arrow-right"></i></a>
+        </div>
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 g-3">
+            {% for product in all_products %}
+                <div class="col">{% include 'customer/_product_card.html' %}</div>
+            {% empty %}
+                <p class="text-muted">No products yet.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- ======================= FEATURES STRIP ======================= -->
+    {% include 'customer/_features.html' with layout='row' %}
+</div>
+{% endblock %}

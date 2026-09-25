@@ -1,0 +1,58 @@
+{% extends 'customer/base.html' %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb shop-breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item active">{% if query %}Search{% else %}{{ page_title }}{% endif %}</li>
+        </ol>
+    </nav>
+
+    <div class="row g-4">
+        <!-- Category filter (sidebar) -->
+        {% if not query and not is_wishlist %}
+        <aside class="col-lg-3">
+            <div class="detail-card filter-card">
+                <h6>Categories</h6>
+                <a href="{% url 'product_list' %}" class="{% if not selected_category %}active{% endif %}">All Products</a>
+                {% for category in all_categories %}
+                    <a href="{% url 'product_list' %}?category={{ category.id }}"
+                       class="{% if selected_category.id == category.id %}active{% endif %}">{{ category.name }}</a>
+                {% endfor %}
+            </div>
+        </aside>
+        {% endif %}
+
+        <div class="{% if query or is_wishlist %}col-12{% else %}col-lg-9{% endif %}">
+            <div class="section-head mt-0">
+                <h2>{{ page_title }}</h2>
+                <span class="text-muted">{{ products|length }} product{{ products|length|pluralize }}</span>
+            </div>
+
+            {% if products %}
+                <div class="row row-cols-2 row-cols-md-3 {% if query or is_wishlist %}row-cols-lg-5{% else %}row-cols-lg-4{% endif %} g-3">
+                    {% for product in products %}
+                        <div class="col">{% include 'customer/_product_card.html' %}</div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <!-- Nothing found -->
+                <div class="empty-state">
+                    <i class="bi {% if is_wishlist %}bi-heart{% else %}bi-search{% endif %}"></i>
+                    {% if is_wishlist %}
+                        <h4>Your wishlist is empty</h4>
+                        <p>Tap "Add to Wishlist" on any product to save it here.</p>
+                    {% else %}
+                        <h4>No product found</h4>
+                        {% if query %}<p>We couldn't find anything matching "<strong>{{ query }}</strong>". Try another word.</p>{% endif %}
+                    {% endif %}
+                    <a href="{% url 'product_list' %}" class="btn btn-primary">Browse all products</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

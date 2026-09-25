@@ -1,0 +1,101 @@
+{% extends 'admin_panel/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <div>
+        <h1>{{ title }}</h1>
+        <p><a href="{% url 'admin_products' %}">Products</a> / {{ title }}</p>
+    </div>
+</div>
+
+{% if form.errors %}
+    <div class="alert alert-danger">Please fix the errors below.</div>
+{% endif %}
+
+<!-- enctype="multipart/form-data" is REQUIRED for uploading images -->
+<form method="post" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+    <div class="row g-4">
+        <!-- ======================= LEFT COLUMN ======================= -->
+        <div class="col-xl-8">
+            <div class="panel mb-4">
+                <h5 class="panel-title">Basic Information</h5>
+                {% include 'admin_panel/_field.html' with field=form.name %}
+                <div class="row">
+                    <div class="col-md-6">{% include 'admin_panel/_field.html' with field=form.category %}</div>
+                    <div class="col-md-6">{% include 'admin_panel/_field.html' with field=form.stock_quantity %}</div>
+                    <div class="col-md-6">{% include 'admin_panel/_field.html' with field=form.price %}</div>
+                    <div class="col-md-6">{% include 'admin_panel/_field.html' with field=form.old_price %}</div>
+                </div>
+                {% include 'admin_panel/_field.html' with field=form.description %}
+            </div>
+
+            <div class="panel">
+                <h5 class="panel-title">Product Information <small class="text-secondary fw-normal">(optional, for laptops &amp; phones)</small></h5>
+                <div class="row">
+                    <div class="col-md-6">{% include 'admin_panel/_field.html' with field=form.processor %}</div>
+                    <div class="col-md-6">{% include 'admin_panel/_field.html' with field=form.ram %}</div>
+                    <div class="col-md-6">{% include 'admin_panel/_field.html' with field=form.storage %}</div>
+                    <div class="col-md-6">{% include 'admin_panel/_field.html' with field=form.display %}</div>
+                    <div class="col-md-6">{% include 'admin_panel/_field.html' with field=form.battery %}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================= RIGHT COLUMN ======================= -->
+        <div class="col-xl-4">
+            <div class="panel mb-4">
+                <h5 class="panel-title">Product Image</h5>
+                <div class="image-preview mb-3">
+                    {% if product.image %}
+                        <img id="preview" src="{{ product.image.url }}" alt="Current image">
+                    {% else %}
+                        <img id="preview" src="" alt="" hidden>
+                        <div id="preview-empty"><i class="bi bi-image"></i><span>No image selected</span></div>
+                    {% endif %}
+                </div>
+                {% include 'admin_panel/_field.html' with field=form.image %}
+
+                <details class="mt-2" {% if product.image_2 or product.image_3 or product.image_4 %}open{% endif %}>
+                    <summary class="text-secondary small mb-2">Extra gallery images (optional)</summary>
+                    {% include 'admin_panel/_field.html' with field=form.image_2 %}
+                    {% include 'admin_panel/_field.html' with field=form.image_3 %}
+                    {% include 'admin_panel/_field.html' with field=form.image_4 %}
+                </details>
+            </div>
+
+            <div class="panel mb-4">
+                <h5 class="panel-title">Display</h5>
+                <div class="row">
+                    <div class="col-6">{% include 'admin_panel/_field.html' with field=form.rating %}</div>
+                    <div class="col-6">{% include 'admin_panel/_field.html' with field=form.review_count %}</div>
+                </div>
+                <div class="form-check form-switch">
+                    {{ form.is_featured }}
+                    <label class="form-check-label" for="{{ form.is_featured.id_for_label }}">{{ form.is_featured.label }}</label>
+                </div>
+            </div>
+
+            <div class="d-flex gap-2">
+                <a href="{% url 'admin_products' %}" class="btn btn-outline-secondary flex-grow-1">Cancel</a>
+                <button type="submit" class="btn btn-primary flex-grow-1"><i class="bi bi-check2"></i> Save Product</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    // Show a preview of the chosen image before saving (plain JavaScript)
+    document.getElementById('{{ form.image.id_for_label }}').addEventListener('change', function () {
+        const file = this.files[0];
+        if (!file) return;
+        const preview = document.getElementById('preview');
+        preview.src = URL.createObjectURL(file);
+        preview.hidden = false;
+        const empty = document.getElementById('preview-empty');
+        if (empty) empty.remove();
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'admin_panel/base.html' %}
+
+{% block title %}Customers{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <div>
+        <h1>Customers</h1>
+        <p>Everyone who has placed an order (grouped by email).</p>
+    </div>
+</div>
+
+<div class="panel">
+    <form method="get" class="mb-3" style="max-width:420px">
+        {% include 'admin_panel/_search_box.html' with placeholder='Search customers...' %}
+    </form>
+
+    <div class="table-responsive">
+        <table class="table admin-table align-middle mb-0">
+            <thead><tr><th>Customer</th><th>Phone</th><th>Orders</th><th>Total Spent</th><th>Last Order</th></tr></thead>
+            <tbody>
+                {% for customer in customers %}
+                    <tr>
+                        <td class="d-flex align-items-center gap-3">
+                            <span class="avatar">{{ customer.name|first|upper }}</span>
+                            <div>
+                                <div class="fw-semibold">{{ customer.name }}</div>
+                                <small class="text-secondary">{{ customer.email }}</small>
+                            </div>
+                        </td>
+                        <td>{{ customer.phone }}</td>
+                        <td><a href="{% url 'admin_orders' %}?q={{ customer.email|urlencode }}" class="pill">{{ customer.order_count }}</a></td>
+                        <td class="fw-semibold">${{ customer.total_spent|floatformat:2 }}</td>
+                        <td class="text-secondary">{{ customer.last_order|date:"d M Y" }}</td>
+                    </tr>
+                {% empty %}
+                    <tr><td colspan="5" class="text-center text-secondary py-5"><i class="bi bi-people fs-2 d-block mb-2"></i>No customers yet.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

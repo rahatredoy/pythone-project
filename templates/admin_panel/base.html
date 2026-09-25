@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    {% include 'admin_panel/_head.html' %}
+    <title>{% block title %}Dashboard{% endblock %} | MiniShop Admin</title>
+</head>
+<body>
+{% with url_name=request.resolver_match.url_name %}
+<div class="admin-layout">
+
+    <!-- ======================= SIDEBAR ======================= -->
+    <aside class="sidebar" id="sidebar">
+        <a href="{% url 'dashboard' %}" class="sidebar-logo">
+            <i class="bi bi-bag-fill"></i>
+            <span>Mini<b>Shop</b> <small>Admin</small></span>
+        </a>
+
+        <nav class="sidebar-menu">
+            <a href="{% url 'dashboard' %}" class="{% if url_name == 'dashboard' %}active{% endif %}"><i class="bi bi-grid-1x2"></i> Dashboard</a>
+            <a href="{% url 'admin_products' %}" class="{% if 'admin_product' in url_name %}active{% endif %}"><i class="bi bi-box-seam"></i> Products</a>
+            <a href="{% url 'admin_categories' %}" class="{% if 'admin_categor' in url_name %}active{% endif %}"><i class="bi bi-tags"></i> Categories</a>
+            <a href="{% url 'admin_orders' %}" class="{% if 'admin_order' in url_name %}active{% endif %}"><i class="bi bi-receipt"></i> Orders</a>
+            <a href="{% url 'admin_customers' %}" class="{% if url_name == 'admin_customers' %}active{% endif %}"><i class="bi bi-people"></i> Customers</a>
+
+            <div class="sidebar-divider"></div>
+            <a href="{% url 'home' %}" target="_blank"><i class="bi bi-shop"></i> View Website</a>
+            <form action="{% url 'admin_logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit"><i class="bi bi-box-arrow-left"></i> Logout</button>
+            </form>
+        </nav>
+    </aside>
+
+    <!-- ======================= MAIN AREA ======================= -->
+    <div class="main">
+        <header class="topbar">
+            <button class="btn btn-dark d-lg-none" type="button" onclick="document.getElementById('sidebar').classList.toggle('open')" aria-label="Menu">
+                <i class="bi bi-list"></i>
+            </button>
+
+            <form class="topbar-search" action="{% url 'admin_products' %}" method="get">
+                <i class="bi bi-search"></i>
+                <input type="search" name="q" placeholder="Search products..." value="{{ query|default:'' }}">
+            </form>
+
+            <div class="dropdown ms-auto">
+                <a href="#" class="admin-profile" data-bs-toggle="dropdown">
+                    <span class="avatar">{{ user.username|first|upper }}</span>
+                    <span class="d-none d-sm-block">
+                        <strong>{{ user.get_full_name|default:user.username }}</strong>
+                        <small>Administrator</small>
+                    </span>
+                    <i class="bi bi-chevron-down small"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="{% url 'home' %}" target="_blank"><i class="bi bi-shop me-2"></i>View website</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <form action="{% url 'admin_logout' %}" method="post">
+                            {% csrf_token %}
+                            <button class="dropdown-item text-danger" type="submit"><i class="bi bi-box-arrow-left me-2"></i>Logout</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+        <div class="content">
+            {% include '_messages.html' %}
+
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</div>
+{% endwith %}
+
+<script src="{% static 'vendor/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

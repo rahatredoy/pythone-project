@@ -1,0 +1,696 @@
+{
+  "categories": [
+    {
+      "name": "Electronics",
+      "image": "dell-xps-13-laptop-1.webp"
+    },
+    {
+      "name": "Footwear",
+      "image": "sports-running-shoes-1.webp"
+    },
+    {
+      "name": "Accessories",
+      "image": "apple-watch-series-4-1.webp"
+    },
+    {
+      "name": "Bags",
+      "image": "white-leather-backpack-1.webp"
+    },
+    {
+      "name": "Home & Living",
+      "image": "table-lamp-1.webp"
+    },
+    {
+      "name": "Mobile",
+      "image": "iphone-13-pro-1.webp"
+    },
+    {
+      "name": "Fashion",
+      "image": "blue-summer-frock-1.webp"
+    },
+    {
+      "name": "Beauty",
+      "image": "dior-j-adore-1.webp"
+    }
+  ],
+  "products": [
+    {
+      "name": "Apple MacBook Pro 14",
+      "category": "Electronics",
+      "price": 1899.0,
+      "old_price": 1999.0,
+      "stock_quantity": 8,
+      "rating": 4.9,
+      "review_count": 24,
+      "is_featured": true,
+      "description": "The MacBook Pro 14 is a powerful laptop for developers, designers and students. It has a bright Liquid Retina display, a fast Apple chip and all-day battery life in a slim aluminium body.",
+      "images": [
+        "apple-macbook-pro-14-1.webp",
+        "apple-macbook-pro-14-2.webp",
+        "apple-macbook-pro-14-3.webp"
+      ],
+      "processor": "Apple M3 Pro chip",
+      "ram": "18GB unified memory",
+      "storage": "512GB SSD",
+      "display": "14.2\" Liquid Retina XDR",
+      "battery": "Up to 18 hours"
+    },
+    {
+      "name": "Dell XPS 13 Laptop",
+      "category": "Electronics",
+      "price": 1299.0,
+      "old_price": 1499.0,
+      "stock_quantity": 12,
+      "rating": 4.7,
+      "review_count": 18,
+      "is_featured": true,
+      "description": "The Dell XPS 13 is a compact premium laptop with an edge-to-edge display. It is light enough to carry every day and fast enough for coding, office work and streaming.",
+      "images": [
+        "dell-xps-13-laptop-1.webp",
+        "dell-xps-13-laptop-2.webp",
+        "dell-xps-13-laptop-3.webp"
+      ],
+      "processor": "Intel Core i7 13th Gen",
+      "ram": "16GB RAM",
+      "storage": "512GB SSD",
+      "display": "13.4\" Full HD+ InfinityEdge",
+      "battery": "Up to 12 hours"
+    },
+    {
+      "name": "Asus Zenbook Pro Duo",
+      "category": "Electronics",
+      "price": 1650.0,
+      "old_price": 1799.0,
+      "stock_quantity": 5,
+      "rating": 4.6,
+      "review_count": 11,
+      "is_featured": false,
+      "description": "The Zenbook Pro Duo has two screens for creators who need more space. The second touch screen is perfect for tool palettes, timelines and chat windows.",
+      "images": [
+        "asus-zenbook-pro-duo-1.webp",
+        "asus-zenbook-pro-duo-2.webp",
+        "asus-zenbook-pro-duo-3.webp"
+      ],
+      "processor": "Intel Core i9 13th Gen",
+      "ram": "32GB RAM",
+      "storage": "1TB SSD",
+      "display": "14.5\" 2.8K OLED + ScreenPad Plus",
+      "battery": "Up to 9 hours"
+    },
+    {
+      "name": "Lenovo Yoga 920",
+      "category": "Electronics",
+      "price": 999.0,
+      "old_price": 1099.0,
+      "stock_quantity": 10,
+      "rating": 4.5,
+      "review_count": 9,
+      "is_featured": false,
+      "description": "The Lenovo Yoga 920 is a 2-in-1 convertible laptop. Use it as a laptop for work or fold it into a tablet for drawing and watching videos.",
+      "images": [
+        "lenovo-yoga-920-1.webp",
+        "lenovo-yoga-920-2.webp",
+        "lenovo-yoga-920-3.webp"
+      ],
+      "processor": "Intel Core i7 8th Gen",
+      "ram": "16GB RAM",
+      "storage": "512GB SSD",
+      "display": "13.9\" 4K UHD Touch",
+      "battery": "Up to 15 hours"
+    },
+    {
+      "name": "Huawei MateBook X Pro",
+      "category": "Electronics",
+      "price": 1250.0,
+      "old_price": null,
+      "stock_quantity": 7,
+      "rating": 4.4,
+      "review_count": 8,
+      "is_featured": false,
+      "description": "A thin and light laptop with a stunning 3.1K touch display and a full-size keyboard. Great for students and professionals on the move.",
+      "images": [
+        "huawei-matebook-x-pro-1.webp",
+        "huawei-matebook-x-pro-2.webp",
+        "huawei-matebook-x-pro-3.webp"
+      ],
+      "processor": "Intel Core i7 12th Gen",
+      "ram": "16GB RAM",
+      "storage": "1TB SSD",
+      "display": "14.2\" 3.1K Touch Display",
+      "battery": "Up to 11 hours"
+    },
+    {
+      "name": "Apple AirPods Max",
+      "category": "Electronics",
+      "price": 499.0,
+      "old_price": 549.0,
+      "stock_quantity": 15,
+      "rating": 4.8,
+      "review_count": 21,
+      "is_featured": true,
+      "description": "Over-ear wireless headphones with active noise cancellation and high-fidelity audio. Soft memory-foam ear cushions keep them comfortable for hours.",
+      "images": [
+        "apple-airpods-max-1.webp"
+      ]
+    },
+    {
+      "name": "Apple AirPods",
+      "category": "Electronics",
+      "price": 119.0,
+      "old_price": 129.0,
+      "stock_quantity": 30,
+      "rating": 4.6,
+      "review_count": 32,
+      "is_featured": false,
+      "description": "Wireless earbuds that connect instantly to your phone. Enjoy clear sound, easy controls and a charging case that gives you more than 24 hours of listening.",
+      "images": [
+        "apple-airpods-1.webp",
+        "apple-airpods-2.webp",
+        "apple-airpods-3.webp"
+      ]
+    },
+    {
+      "name": "Amazon Echo Plus",
+      "category": "Electronics",
+      "price": 89.0,
+      "old_price": 99.0,
+      "stock_quantity": 20,
+      "rating": 4.3,
+      "review_count": 14,
+      "is_featured": false,
+      "description": "A smart speaker with Alexa built in. Play music, set reminders, check the weather and control your smart home with your voice.",
+      "images": [
+        "amazon-echo-plus-1.webp",
+        "amazon-echo-plus-2.webp"
+      ]
+    },
+    {
+      "name": "iPhone 13 Pro",
+      "category": "Mobile",
+      "price": 999.0,
+      "old_price": 1099.0,
+      "stock_quantity": 9,
+      "rating": 4.8,
+      "review_count": 40,
+      "is_featured": true,
+      "description": "The iPhone 13 Pro has a pro camera system, a super-smooth ProMotion display and the fast A15 Bionic chip. Built with surgical-grade stainless steel.",
+      "images": [
+        "iphone-13-pro-1.webp",
+        "iphone-13-pro-2.webp",
+        "iphone-13-pro-3.webp"
+      ],
+      "processor": "Apple A15 Bionic",
+      "ram": "6GB RAM",
+      "storage": "256GB Storage",
+      "display": "6.1\" Super Retina XDR",
+      "battery": "3095 mAh"
+    },
+    {
+      "name": "Samsung Galaxy S10",
+      "category": "Mobile",
+      "price": 649.0,
+      "old_price": 699.0,
+      "stock_quantity": 14,
+      "rating": 4.5,
+      "review_count": 27,
+      "is_featured": false,
+      "description": "The Galaxy S10 comes with a beautiful curved AMOLED screen, a triple camera and wireless charging. A reliable flagship phone at a great price.",
+      "images": [
+        "samsung-galaxy-s10-1.webp",
+        "samsung-galaxy-s10-2.webp",
+        "samsung-galaxy-s10-3.webp"
+      ],
+      "processor": "Snapdragon 855",
+      "ram": "8GB RAM",
+      "storage": "128GB Storage",
+      "display": "6.1\" Dynamic AMOLED",
+      "battery": "3400 mAh"
+    },
+    {
+      "name": "Oppo F19 Pro Plus",
+      "category": "Mobile",
+      "price": 379.0,
+      "old_price": 399.0,
+      "stock_quantity": 18,
+      "rating": 4.2,
+      "review_count": 12,
+      "is_featured": false,
+      "description": "A stylish 5G phone with a quad camera and super-fast 50W flash charging. Perfect for social media, photos and gaming.",
+      "images": [
+        "oppo-f19-pro-plus-1.webp",
+        "oppo-f19-pro-plus-2.webp",
+        "oppo-f19-pro-plus-3.webp"
+      ],
+      "processor": "MediaTek Dimensity 800U",
+      "ram": "8GB RAM",
+      "storage": "128GB Storage",
+      "display": "6.4\" AMOLED",
+      "battery": "4310 mAh"
+    },
+    {
+      "name": "Realme XT",
+      "category": "Mobile",
+      "price": 329.0,
+      "old_price": 349.0,
+      "stock_quantity": 22,
+      "rating": 4.3,
+      "review_count": 16,
+      "is_featured": false,
+      "description": "The Realme XT features a 64MP quad camera, an in-display fingerprint sensor and VOOC fast charging, all at a budget-friendly price.",
+      "images": [
+        "realme-xt-1.webp",
+        "realme-xt-2.webp",
+        "realme-xt-3.webp"
+      ],
+      "processor": "Snapdragon 712",
+      "ram": "8GB RAM",
+      "storage": "128GB Storage",
+      "display": "6.4\" Super AMOLED",
+      "battery": "4000 mAh"
+    },
+    {
+      "name": "iPad Mini 2021",
+      "category": "Mobile",
+      "price": 479.0,
+      "old_price": 499.0,
+      "stock_quantity": 6,
+      "rating": 4.7,
+      "review_count": 19,
+      "is_featured": true,
+      "description": "A small but powerful tablet that fits in one hand. Take notes with Apple Pencil, read books, watch movies and play games anywhere.",
+      "images": [
+        "ipad-mini-2021-1.webp",
+        "ipad-mini-2021-2.webp",
+        "ipad-mini-2021-3.webp",
+        "ipad-mini-2021-4.webp"
+      ],
+      "processor": "Apple A15 Bionic",
+      "ram": "4GB RAM",
+      "storage": "64GB Storage",
+      "display": "8.3\" Liquid Retina",
+      "battery": "Up to 10 hours"
+    },
+    {
+      "name": "Nike Air Jordan 1",
+      "category": "Footwear",
+      "price": 149.0,
+      "old_price": null,
+      "stock_quantity": 12,
+      "rating": 4.8,
+      "review_count": 35,
+      "is_featured": true,
+      "description": "The classic Air Jordan 1 in red and black. Premium leather upper, cushioned sole and the iconic Wings logo make it a must-have sneaker.",
+      "images": [
+        "nike-air-jordan-1-1.webp",
+        "nike-air-jordan-1-2.webp",
+        "nike-air-jordan-1-3.webp",
+        "nike-air-jordan-1-4.webp"
+      ]
+    },
+    {
+      "name": "Puma Future Rider",
+      "category": "Footwear",
+      "price": 79.0,
+      "old_price": 89.0,
+      "stock_quantity": 25,
+      "rating": 4.4,
+      "review_count": 13,
+      "is_featured": false,
+      "description": "Retro-style running trainers with a lightweight cushioned sole. Comfortable enough for all-day wear.",
+      "images": [
+        "puma-future-rider-1.webp",
+        "puma-future-rider-2.webp",
+        "puma-future-rider-3.webp",
+        "puma-future-rider-4.webp"
+      ]
+    },
+    {
+      "name": "Sports Running Shoes",
+      "category": "Footwear",
+      "price": 45.0,
+      "old_price": 59.0,
+      "stock_quantity": 40,
+      "rating": 4.5,
+      "review_count": 22,
+      "is_featured": true,
+      "description": "Breathable mesh running shoes with a soft foam sole. Great for jogging, the gym or everyday walking.",
+      "images": [
+        "sports-running-shoes-1.webp",
+        "sports-running-shoes-2.webp",
+        "sports-running-shoes-3.webp",
+        "sports-running-shoes-4.webp"
+      ]
+    },
+    {
+      "name": "Calvin Klein Heel Shoes",
+      "category": "Footwear",
+      "price": 79.0,
+      "old_price": null,
+      "stock_quantity": 10,
+      "rating": 4.3,
+      "review_count": 7,
+      "is_featured": false,
+      "description": "Elegant heel shoes for parties and office wear. Soft inner lining keeps your feet comfortable.",
+      "images": [
+        "calvin-klein-heel-shoes-1.webp",
+        "calvin-klein-heel-shoes-2.webp",
+        "calvin-klein-heel-shoes-3.webp",
+        "calvin-klein-heel-shoes-4.webp"
+      ]
+    },
+    {
+      "name": "Apple Watch Series 4",
+      "category": "Accessories",
+      "price": 299.0,
+      "old_price": 349.0,
+      "stock_quantity": 11,
+      "rating": 4.7,
+      "review_count": 26,
+      "is_featured": true,
+      "description": "A smart watch that tracks your fitness, heart rate and sleep. Get notifications, reply to messages and pay with your wrist.",
+      "images": [
+        "apple-watch-series-4-1.webp",
+        "apple-watch-series-4-2.webp",
+        "apple-watch-series-4-3.webp"
+      ]
+    },
+    {
+      "name": "Brown Leather Belt Watch",
+      "category": "Accessories",
+      "price": 89.0,
+      "old_price": null,
+      "stock_quantity": 17,
+      "rating": 4.4,
+      "review_count": 10,
+      "is_featured": false,
+      "description": "A classic analogue wrist watch with a genuine brown leather strap. Simple, stylish and water resistant.",
+      "images": [
+        "brown-leather-belt-watch-1.webp",
+        "brown-leather-belt-watch-2.webp",
+        "brown-leather-belt-watch-3.webp"
+      ]
+    },
+    {
+      "name": "Black Sunglasses",
+      "category": "Accessories",
+      "price": 29.0,
+      "old_price": 35.0,
+      "stock_quantity": 50,
+      "rating": 4.2,
+      "review_count": 15,
+      "is_featured": false,
+      "description": "Lightweight black sunglasses with UV400 protection. A timeless look for summer days.",
+      "images": [
+        "black-sunglasses-1.webp",
+        "black-sunglasses-2.webp",
+        "black-sunglasses-3.webp"
+      ]
+    },
+    {
+      "name": "MagSafe Battery Pack",
+      "category": "Accessories",
+      "price": 89.0,
+      "old_price": 99.0,
+      "stock_quantity": 16,
+      "rating": 4.1,
+      "review_count": 6,
+      "is_featured": false,
+      "description": "A compact magnetic battery pack that snaps onto the back of your phone and charges it wirelessly on the go.",
+      "images": [
+        "magsafe-battery-pack-1.webp",
+        "magsafe-battery-pack-2.webp"
+      ]
+    },
+    {
+      "name": "Beats Flex Earphones",
+      "category": "Accessories",
+      "price": 45.0,
+      "old_price": 49.0,
+      "stock_quantity": 35,
+      "rating": 4.3,
+      "review_count": 18,
+      "is_featured": false,
+      "description": "Wireless in-ear earphones with a flexible neckband. Up to 12 hours of battery and magnetic earbuds that never get lost.",
+      "images": [
+        "beats-flex-earphones-1.webp"
+      ]
+    },
+    {
+      "name": "White Leather Backpack",
+      "category": "Bags",
+      "price": 39.0,
+      "old_price": 49.0,
+      "stock_quantity": 20,
+      "rating": 4.5,
+      "review_count": 14,
+      "is_featured": true,
+      "description": "A stylish faux-leather backpack with plenty of room for books, a tablet and daily essentials.",
+      "images": [
+        "white-leather-backpack-1.webp",
+        "white-leather-backpack-2.webp",
+        "white-leather-backpack-3.webp"
+      ]
+    },
+    {
+      "name": "Blue Women's Handbag",
+      "category": "Bags",
+      "price": 49.0,
+      "old_price": null,
+      "stock_quantity": 13,
+      "rating": 4.3,
+      "review_count": 9,
+      "is_featured": false,
+      "description": "A trendy blue handbag with a spacious main compartment and a detachable shoulder strap.",
+      "images": [
+        "blue-women-s-handbag-1.webp",
+        "blue-women-s-handbag-2.webp",
+        "blue-women-s-handbag-3.webp"
+      ]
+    },
+    {
+      "name": "Heshe Leather Bag",
+      "category": "Bags",
+      "price": 119.0,
+      "old_price": 129.0,
+      "stock_quantity": 8,
+      "rating": 4.6,
+      "review_count": 11,
+      "is_featured": false,
+      "description": "A premium genuine leather bag for work and travel. Strong stitching and a classic design that lasts for years.",
+      "images": [
+        "heshe-leather-bag-1.webp",
+        "heshe-leather-bag-2.webp",
+        "heshe-leather-bag-3.webp"
+      ]
+    },
+    {
+      "name": "Black Women's Handbag",
+      "category": "Bags",
+      "price": 59.0,
+      "old_price": null,
+      "stock_quantity": 15,
+      "rating": 4.4,
+      "review_count": 8,
+      "is_featured": false,
+      "description": "An elegant black handbag that goes with every outfit. Includes inner pockets for your phone and keys.",
+      "images": [
+        "black-women-s-handbag-1.webp",
+        "black-women-s-handbag-2.webp",
+        "black-women-s-handbag-3.webp"
+      ]
+    },
+    {
+      "name": "Table Lamp",
+      "category": "Home & Living",
+      "price": 28.0,
+      "old_price": 35.0,
+      "stock_quantity": 24,
+      "rating": 4.4,
+      "review_count": 12,
+      "is_featured": false,
+      "description": "A modern table lamp with a warm, soft light. Perfect for a study desk or bedside table.",
+      "images": [
+        "table-lamp-1.webp"
+      ]
+    },
+    {
+      "name": "Executive Office Chair",
+      "category": "Home & Living",
+      "price": 449.0,
+      "old_price": 499.0,
+      "stock_quantity": 4,
+      "rating": 4.6,
+      "review_count": 7,
+      "is_featured": false,
+      "description": "A comfortable executive chair with soft cushioning and a sturdy base. Ideal for long hours of study or work.",
+      "images": [
+        "executive-office-chair-1.webp",
+        "executive-office-chair-2.webp",
+        "executive-office-chair-3.webp"
+      ]
+    },
+    {
+      "name": "Ceramic Plant Pot",
+      "category": "Home & Living",
+      "price": 14.0,
+      "old_price": null,
+      "stock_quantity": 60,
+      "rating": 4.2,
+      "review_count": 9,
+      "is_featured": false,
+      "description": "A decorative ceramic plant pot that brings a fresh, natural touch to any room.",
+      "images": [
+        "ceramic-plant-pot-1.webp",
+        "ceramic-plant-pot-2.webp",
+        "ceramic-plant-pot-3.webp",
+        "ceramic-plant-pot-4.webp"
+      ]
+    },
+    {
+      "name": "Wooden Bedside Table",
+      "category": "Home & Living",
+      "price": 279.0,
+      "old_price": 299.0,
+      "stock_quantity": 6,
+      "rating": 4.5,
+      "review_count": 5,
+      "is_featured": false,
+      "description": "A solid wooden bedside table with a drawer for storage. A warm and natural addition to your bedroom.",
+      "images": [
+        "wooden-bedside-table-1.webp",
+        "wooden-bedside-table-2.webp",
+        "wooden-bedside-table-3.webp"
+      ]
+    },
+    {
+      "name": "Blue & Black Check Shirt",
+      "category": "Fashion",
+      "price": 29.0,
+      "old_price": null,
+      "stock_quantity": 30,
+      "rating": 4.3,
+      "review_count": 12,
+      "is_featured": false,
+      "description": "A soft cotton check shirt that is perfect for casual days. Easy to wash and comfortable to wear.",
+      "images": [
+        "blue--black-check-shirt-1.webp",
+        "blue--black-check-shirt-2.webp",
+        "blue--black-check-shirt-3.webp",
+        "blue--black-check-shirt-4.webp"
+      ]
+    },
+    {
+      "name": "Men's Plaid Shirt",
+      "category": "Fashion",
+      "price": 34.0,
+      "old_price": 39.0,
+      "stock_quantity": 25,
+      "rating": 4.4,
+      "review_count": 10,
+      "is_featured": false,
+      "description": "A classic plaid shirt with a relaxed fit. Wear it buttoned up or open over a t-shirt.",
+      "images": [
+        "men-s-plaid-shirt-1.webp",
+        "men-s-plaid-shirt-2.webp",
+        "men-s-plaid-shirt-3.webp",
+        "men-s-plaid-shirt-4.webp"
+      ]
+    },
+    {
+      "name": "Blue Summer Frock",
+      "category": "Fashion",
+      "price": 29.0,
+      "old_price": null,
+      "stock_quantity": 18,
+      "rating": 4.5,
+      "review_count": 8,
+      "is_featured": false,
+      "description": "A light and breezy summer frock in a lovely blue shade. Great for outings and holidays.",
+      "images": [
+        "blue-summer-frock-1.webp",
+        "blue-summer-frock-2.webp",
+        "blue-summer-frock-3.webp",
+        "blue-summer-frock-4.webp"
+      ]
+    },
+    {
+      "name": "Gray Casual Dress",
+      "category": "Fashion",
+      "price": 34.0,
+      "old_price": 42.0,
+      "stock_quantity": 14,
+      "rating": 4.2,
+      "review_count": 6,
+      "is_featured": false,
+      "description": "A simple and elegant gray dress made from soft fabric. Comfortable for all-day wear.",
+      "images": [
+        "gray-casual-dress-1.webp",
+        "gray-casual-dress-2.webp",
+        "gray-casual-dress-3.webp",
+        "gray-casual-dress-4.webp"
+      ]
+    },
+    {
+      "name": "Chanel Coco Noir",
+      "category": "Beauty",
+      "price": 125.0,
+      "old_price": 129.0,
+      "stock_quantity": 9,
+      "rating": 4.8,
+      "review_count": 16,
+      "is_featured": false,
+      "description": "An elegant eau de parfum with rich, warm notes. A luxury fragrance for special evenings.",
+      "images": [
+        "chanel-coco-noir-1.webp",
+        "chanel-coco-noir-2.webp",
+        "chanel-coco-noir-3.webp"
+      ]
+    },
+    {
+      "name": "Dior J'adore",
+      "category": "Beauty",
+      "price": 85.0,
+      "old_price": 89.0,
+      "stock_quantity": 12,
+      "rating": 4.7,
+      "review_count": 13,
+      "is_featured": true,
+      "description": "A floral fragrance with a bright and feminine scent. One of the most loved perfumes in the world.",
+      "images": [
+        "dior-j-adore-1.webp",
+        "dior-j-adore-2.webp",
+        "dior-j-adore-3.webp"
+      ]
+    },
+    {
+      "name": "Calvin Klein CK One",
+      "category": "Beauty",
+      "price": 49.0,
+      "old_price": null,
+      "stock_quantity": 20,
+      "rating": 4.5,
+      "review_count": 20,
+      "is_featured": false,
+      "description": "A fresh and clean unisex fragrance that is perfect for everyday use.",
+      "images": [
+        "calvin-klein-ck-one-1.webp",
+        "calvin-klein-ck-one-2.webp",
+        "calvin-klein-ck-one-3.webp"
+      ]
+    },
+    {
+      "name": "Eyeshadow Palette",
+      "category": "Beauty",
+      "price": 19.0,
+      "old_price": 24.0,
+      "stock_quantity": 30,
+      "rating": 4.3,
+      "review_count": 11,
+      "is_featured": false,
+      "description": "A versatile eyeshadow palette with a built-in mirror. Create natural or bold looks with rich, blendable colours.",
+      "images": [
+        "eyeshadow-palette-1.webp"
+      ]
+    }
+  ]
+}

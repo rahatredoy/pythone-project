@@ -1,0 +1,51 @@
+{% extends 'admin_panel/base.html' %}
+
+{% block title %}Products{% endblock %}
+
+{% block content %}
+<div class="page-head">
+    <div>
+        <h1>Products</h1>
+        <p>Manage all products in your store.</p>
+    </div>
+    <a href="{% url 'admin_product_add' %}" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Add Product</a>
+</div>
+
+<div class="panel">
+    <!-- Search + category filter (GET form: ?q=...&category=...) -->
+    <form method="get" class="row g-2 mb-3">
+        <div class="col-md-6">
+            {% include 'admin_panel/_search_box.html' with placeholder='Search by product name...' %}
+        </div>
+        <div class="col-md-4">
+            <select name="category" class="form-select" onchange="this.form.submit()" aria-label="Filter by category">
+                <option value="">All categories</option>
+                {% for category in categories %}
+                    <option value="{{ category.id }}" {% if selected_category == category.id|stringformat:"s" %}selected{% endif %}>{{ category.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-2 d-flex gap-2">
+            <button type="submit" class="btn btn-primary flex-grow-1">Filter</button>
+            {% if query or selected_category %}<a href="{% url 'admin_products' %}" class="btn btn-outline-secondary" title="Clear"><i class="bi bi-x-lg"></i></a>{% endif %}
+        </div>
+    </form>
+
+    <p class="text-secondary small mb-2">{{ products|length }} product{{ products|length|pluralize }} found</p>
+
+    <div class="table-responsive">
+        <table class="table admin-table align-middle mb-0">
+            <thead>
+                <tr><th>Image</th><th>Product Name</th><th>Category</th><th>Price</th><th>Stock</th><th class="text-end">Action</th></tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                    {% include 'admin_panel/_product_row.html' %}
+                {% empty %}
+                    <tr><td colspan="6" class="text-center text-secondary py-5"><i class="bi bi-inbox fs-2 d-block mb-2"></i>No product found</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

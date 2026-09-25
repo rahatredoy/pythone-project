@@ -1,0 +1,35 @@
+{# Reusable product card. Usage: {% include 'customer/_product_card.html' with product=p %} #}
+<div class="product-card">
+    <a href="{% url 'product_detail' product.id %}" class="product-img">
+        {% include 'customer/_tag.html' %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" loading="lazy">
+    </a>
+    <div class="product-body">
+        <a href="{% url 'product_detail' product.id %}" class="product-name">{{ product.name }}</a>
+        <div class="product-category">{{ product.category.name }}</div>
+        <div class="product-price">
+            <span class="{% if product.old_price %}text-sale{% endif %}">${{ product.price|floatformat:2 }}</span>
+            {% if product.old_price %}<del>${{ product.old_price|floatformat:2 }}</del>{% endif %}
+        </div>
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="stars">
+                {% include 'customer/_stars.html' %}
+                <small>({{ product.review_count }})</small>
+            </div>
+            {% if product.in_stock %}
+                <!-- quick "add 1 to cart" button -->
+                <form action="{% url 'cart_add' product.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="quantity" value="1">
+                    <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                    <button type="submit" class="btn-card" title="Add to cart" aria-label="Add {{ product.name }} to cart">
+                        <i class="bi bi-cart-plus"></i>
+                    </button>
+                </form>
+            {% else %}
+                <span class="badge text-bg-light text-danger">Sold out</span>
+            {% endif %}
+        </div>
+        <a href="{% url 'product_detail' product.id %}" class="btn btn-outline-primary btn-sm w-100 mt-2 btn-details">View Details</a>
+    </div>
+</div>

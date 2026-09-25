@@ -1,0 +1,207 @@
+{% extends 'customer/base.html' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb shop-breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'product_list' %}?category={{ product.category.id }}">{{ product.category.name }}</a></li>
+            <li class="breadcrumb-item active">{{ product.name }}</li>
+        </ol>
+    </nav>
+
+    <div class="row g-4">
+        <!-- ======================= LEFT: IMAGE GALLERY ======================= -->
+        <div class="col-lg-6">
+            <div class="detail-card gallery">
+                <!-- Bootstrap carousel = main image. Thumbnails below switch the slide. -->
+                <div id="gallery" class="carousel slide" data-bs-ride="false">
+                    <div class="carousel-inner gallery-main">
+                        {% include 'customer/_tag.html' with size='big' %}
+                        {% for img in product.gallery %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                <a href="{{ img.url }}" target="_blank" class="expand-btn" title="Open full image"><i class="bi bi-arrows-angle-expand"></i></a>
+                                <img src="{{ img.url }}" alt="{{ product.name }} image {{ forloop.counter }}">
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% if product.gallery|length > 1 %}
+                        <button class="carousel-control-prev" type="button" data-bs-target="#gallery" data-bs-slide="prev" aria-label="Previous image">
+                            <span class="hero-arrow"><i class="bi bi-chevron-left"></i></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#gallery" data-bs-slide="next" aria-label="Next image">
+                            <span class="hero-arrow"><i class="bi bi-chevron-right"></i></span>
+                        </button>
+                    {% endif %}
+
+                    <!-- Thumbnails -->
+                    <div class="carousel-indicators gallery-thumbs">
+                        {% for img in product.gallery %}
+                            <button type="button" data-bs-target="#gallery" data-bs-slide-to="{{ forloop.counter0 }}"
+                                    class="{% if forloop.first %}active{% endif %}" aria-label="Show image {{ forloop.counter }}">
+                                <img src="{{ img.url }}" alt="">
+                            </button>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================= RIGHT: PRODUCT INFO ======================= -->
+        <div class="col-lg-6">
+            <div class="detail-card info">
+                <a href="{% url 'product_list' %}?category={{ product.category.id }}" class="category-badge">{{ product.category.name }}</a>
+                <h1 class="detail-title">{{ product.name }}</h1>
+
+                <div class="stars stars-lg mb-3">
+                    {% include 'customer/_stars.html' %}
+                    <small>{{ product.rating }} ({{ product.review_count }} reviews)</small>
+                </div>
+
+                <div class="detail-price">
+                    <span class="price">${{ product.price|floatformat:2 }}</span>
+                    {% if product.old_price %}
+                        <del>${{ product.old_price|floatformat:2 }}</del>
+                        <span class="off-badge">{{ product.discount_percent }}% OFF</span>
+                    {% endif %}
+                </div>
+
+                <p class="detail-desc">{{ product.description|truncatewords:45 }}</p>
+
+                {% if product.specs %}
+                    <ul class="spec-box">
+                        {% for icon, label, value in product.specs %}
+                            <li><i class="bi {{ icon }}"></i> {{ value }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                <!-- Stock status -->
+                {% if product.in_stock %}
+                    <p class="stock in"><i class="bi bi-box-seam"></i> In Stock: {{ product.stock_quantity }} item{{ product.stock_quantity|pluralize }}</p>
+                {% else %}
+                    <p class="stock out"><i class="bi bi-x-circle"></i> Out of Stock</p>
+                {% endif %}
+
+                <!-- Quantity + Add to Cart -->
+                <form action="{% url 'cart_add' product.id %}" method="post" class="d-flex gap-3 flex-wrap mb-3">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <div class="qty-selector">
+                        <button type="button" onclick="changeQty(-1)" aria-label="Decrease quantity">&minus;</button>
+                        <input type="number" id="qty" name="quantity" value="1" min="1" max="{{ product.stock_quantity }}" aria-label="Quantity">
+                        <button type="button" onclick="changeQty(1)" aria-label="Increase quantity">+</button>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-cart flex-grow-1" {% if not product.in_stock %}disabled{% endif %}>
+                        <i class="bi bi-cart3"></i> Add to Cart
+                    </button>
+                </form>
+
+                <div class="row g-3">
+                    <div class="col-6">
+                        <form action="{% url 'wishlist_toggle' product.id %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <button type="submit" class="btn btn-outline-secondary btn-soft w-100">
+                                {% if product.id in wishlist_ids %}
+                                    <i class="bi bi-heart-fill text-danger"></i> In Wishlist
+                                {% else %}
+                                    <i class="bi bi-heart"></i> Add to Wishlist
+                                {% endif %}
+                            </button>
+                        </form>
+                    </div>
+                    <div class="col-6">
+                        <button type="button" class="btn btn-outline-secondary btn-soft w-100" onclick="shareProduct(this)">
+                            <i class="bi bi-share"></i> <span>Share</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================= TABS + FEATURES ======================= -->
+    <div class="row g-4 mt-1">
+        <div class="col-lg-8">
+            <div class="detail-card">
+                <ul class="nav shop-tabs" role="tablist">
+                    <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-desc" type="button">Description</button></li>
+                    <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-specs" type="button">Specifications</button></li>
+                    <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-reviews" type="button">Reviews ({{ product.review_count }})</button></li>
+                </ul>
+                <div class="tab-content pt-3">
+                    <div class="tab-pane fade show active" id="tab-desc">
+                        <p class="detail-desc mb-0">{{ product.description|linebreaksbr }}</p>
+                    </div>
+
+                    <div class="tab-pane fade" id="tab-specs">
+                        <table class="table spec-table mb-0">
+                            <tr><th>Category</th><td>{{ product.category.name }}</td></tr>
+                            {% for icon, label, value in product.specs %}
+                                <tr><th>{{ label }}</th><td>{{ value }}</td></tr>
+                            {% endfor %}
+                            <tr><th>Stock</th><td>{{ product.stock_quantity }}</td></tr>
+                            <tr><th>Added on</th><td>{{ product.created_date|date:"d M Y" }}</td></tr>
+                        </table>
+                    </div>
+
+                    <div class="tab-pane fade" id="tab-reviews">
+                        <div class="d-flex align-items-center gap-4">
+                            <div class="rating-big">{{ product.rating }}</div>
+                            <div>
+                                <div class="stars stars-lg">
+                                    {% include 'customer/_stars.html' %}
+                                </div>
+                                <p class="text-muted mb-0">Based on {{ product.review_count }} customer review{{ product.review_count|pluralize }}.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            {% include 'customer/_features.html' with layout='grid' %}
+        </div>
+    </div>
+
+    <!-- ======================= RELATED PRODUCTS ======================= -->
+    {% if related_products %}
+    <section class="section">
+        <div class="section-head">
+            <h2>Related Products</h2>
+            <a href="{% url 'product_list' %}?category={{ product.category.id }}">View All <i class="bi bi-arrow-right"></i></a>
+        </div>
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 g-3">
+            {% for product in related_products %}
+                <div class="col">{% include 'customer/_product_card.html' %}</div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Quantity selector: + / - buttons (plain JavaScript, no framework)
+    function changeQty(step) {
+        const input = document.getElementById('qty');
+        const max = parseInt(input.max) || 1;
+        let value = (parseInt(input.value) || 1) + step;
+        input.value = Math.min(Math.max(value, 1), max);
+    }
+
+    // Share button: copy the page link to the clipboard
+    function shareProduct(button) {
+        navigator.clipboard.writeText(window.location.href).then(function () {
+            button.querySelector('span').textContent = 'Link copied!';
+            setTimeout(function () { button.querySelector('span').textContent = 'Share'; }, 2000);
+        });
+    }
+</script>
+{% endblock %}
