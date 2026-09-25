@@ -1,0 +1,12 @@
+# Build settings for Nixpacks (used by Dokploy)
+
+[variables]
+NIXPACKS_PYTHON_VERSION = "3.12"
+
+# After installing requirements.txt, copy all CSS/JS/images into staticfiles/
+[phases.build]
+cmds = ["python manage.py collectstatic --noinput"]
+
+# When the container starts: make sure the schema + tables exist, then run the site with gunicorn
+[start]
+cmd = "python manage.py create_schema && python manage.py migrate --noinput && gunicorn minishop.wsgi:application --bind 0.0.0.0:${PORT:-8000} --workers 3 --timeout 60"

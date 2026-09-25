@@ -1,3 +1,5 @@
-Django>=5.2,<6.1
-psycopg[binary]>=3.2
-Pillow>=11.0
+Django>=5.2,<6.0        # 5.2 = LTS (long-term support) version
+psycopg[binary]>=3.2    # PostgreSQL driver
+Pillow>=11.0            # needed by ImageField (image upload)
+gunicorn>=23.0          # production web server (used on Dokploy)
+whitenoise>=6.7         # serves CSS/JS/images in production

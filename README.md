@@ -124,6 +124,35 @@ The `search_path=minishop` option keeps MiniShop's tables in their own PostgreSQ
 
 ---
 
+## Deploying on Dokploy (Nixpacks)
+
+The project already includes everything Nixpacks needs:
+- `requirements.txt`: Python packages, including **gunicorn** (production web server) and **whitenoise** (serves CSS/JS)
+- `nixpacks.toml`: uses Python 3.12, runs `collectstatic` while building, and on start runs `create_schema`, then `migrate`, then `gunicorn`
+
+Steps in Dokploy:
+1. Create an **Application** and connect this GitHub repository (branch `main`).
+2. **Build Type** → **Nixpacks**. Leave Publish Directory empty.
+3. **Environment** tab → add:
+   ```
+   DB_NAME=postgres
+   DB_USER=postgres
+   DB_PASSWORD=<your password>
+   DB_HOST=148.113.1.59
+   DB_PORT=5454
+   SECRET_KEY=<a long random text>
+   DEBUG=False
+   ALLOWED_HOSTS=<your-domain>
+   CSRF_TRUSTED_ORIGINS=https://<your-domain>
+   ```
+4. **Domains** tab → add your domain with **Container Port 8000**.
+5. Click **Deploy**.
+
+The server uses the same PostgreSQL database, so all products, categories and the `admin` user are already there.
+The product images in `media/` are part of the repository. Note that images uploaded from the admin panel *on the server* are lost when the app is redeployed, unless you add a Volume in Dokploy.
+
+---
+
 ## 4. Features
 
 **Customer website**

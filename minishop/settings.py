@@ -16,10 +16,18 @@ if _env_file.exists():
             _key, _value = _line.split('=', 1)
             os.environ.setdefault(_key.strip(), _value.strip())
 
-# SECURITY: keep this secret in a real project. DEBUG must be False in production.
-SECRET_KEY = 'django-insecure-minishop-university-demo-key-change-me'
-DEBUG = True
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+# SECURITY: on the server (Dokploy) set a long random SECRET_KEY and DEBUG=False.
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-minishop-university-demo-key-change-me')
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+
+# Domain names that may open the site, comma separated, e.g. "minishop.example.com"
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
+
+# Needed for forms (login, add product...) on https, e.g. "https://minishop.example.com"
+CSRF_TRUSTED_ORIGINS = [url for url in os.environ.get('CSRF_TRUSTED_ORIGINS', '').split(',') if url]
+
+# Dokploy's proxy (Traefik) handles https and tells Django with this header
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # ------------------------------------------------------------------
@@ -37,6 +45,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',   # serves static files on the server
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -112,6 +121,13 @@ USE_TZ = True
 # ------------------------------------------------------------------
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+STATIC_ROOT = BASE_DIR / 'staticfiles'      # "collectstatic" copies everything here for the server
+
+STORAGES = {
+    'default': {'BACKEND': 'django.core.files.storage.FileSystemStorage'},
+    # WhiteNoise compresses CSS/JS so pages load faster
+    'staticfiles': {'BACKEND': 'whitenoise.storage.CompressedStaticFilesStorage'},
+}
 
 # Media files (images uploaded by the admin for products)
 MEDIA_URL = '/media/'
