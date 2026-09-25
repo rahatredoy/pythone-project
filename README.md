@@ -135,17 +135,14 @@ Steps in Dokploy:
 2. **Build Type** → **Nixpacks**. Leave Publish Directory empty.
 3. **Environment** tab → add:
    ```
-   DB_NAME=postgres
-   DB_USER=postgres
-   DB_PASSWORD=<your password>
-   DB_HOST=148.113.1.59
-   DB_PORT=5454
+   DATABASE_URL=postgresql://postgres:<password>@148.113.1.59:5454/postgres
    SECRET_KEY=<a long random text>
    DEBUG=False
    ALLOWED_HOSTS=<your-domain>
    CSRF_TRUSTED_ORIGINS=https://<your-domain>
    ```
-4. **Domains** tab → add your domain with **Container Port 8000**.
+   (Instead of `DATABASE_URL` you can also use `DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT`.)
+4. **Domains** tab → add your domain with **Container Port 3000** (Dokploy's default).
 5. Click **Deploy**.
 
 The server uses the same PostgreSQL database, so all products, categories and the `admin` user are already there.

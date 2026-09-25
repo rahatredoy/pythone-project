@@ -3,6 +3,7 @@ Django settings for the MiniShop project.
 """
 import os
 from pathlib import Path
+from urllib.parse import unquote, urlparse
 
 # BASE_DIR is the MiniShop/ folder (the one that contains manage.py)
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -77,16 +78,20 @@ WSGI_APPLICATION = 'minishop.wsgi.application'
 
 
 # ------------------------------------------------------------------
-# Database: PostgreSQL (connection details come from the .env file)
+# Database: PostgreSQL
+# Either one DATABASE_URL, e.g. postgresql://user:password@host:5432/dbname
+# or separate DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT values.
 # ------------------------------------------------------------------
+_db_url = urlparse(os.environ.get('DATABASE_URL', ''))
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'postgres'),
-        'USER': os.environ.get('DB_USER', 'postgres'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', ''),
-        'HOST': os.environ.get('DB_HOST', 'localhost'),
-        'PORT': os.environ.get('DB_PORT', '5432'),
+        'NAME': _db_url.path.lstrip('/') or os.environ.get('DB_NAME', 'postgres'),
+        'USER': unquote(_db_url.username or '') or os.environ.get('DB_USER', 'postgres'),
+        'PASSWORD': unquote(_db_url.password or '') or os.environ.get('DB_PASSWORD', ''),
+        'HOST': _db_url.hostname or os.environ.get('DB_HOST', 'localhost'),
+        'PORT': _db_url.port or os.environ.get('DB_PORT', '5432'),
         'OPTIONS': {
             # Keep MiniShop tables inside their own PostgreSQL schema called "minishop"
             # (like a folder inside the database) so they don't mix with other tables.
